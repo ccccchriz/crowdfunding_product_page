@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
+import CompanyInfo from "./components/CompanyInfo";
 
 interface tierTypes {
   name: string;
@@ -11,6 +12,7 @@ interface tierTypes {
 
 interface dataTypes {
   company: string;
+  logo: string;
   short_info: string;
   money_wanted: number;
   money_collected: number;
@@ -34,7 +36,17 @@ function App() {
   return (
     <>
       <Header />
-      {data ? <>data</> : <p>Loading</p>}
+      {data ? (
+        <main className="bg-neutral-dark-gray p-4">
+          <CompanyInfo
+            company={data.company}
+            logo={data.logo}
+            short_info={data.short_info}
+          />
+        </main>
+      ) : (
+        <p>Loading</p>
+      )}
     </>
   );
 }
