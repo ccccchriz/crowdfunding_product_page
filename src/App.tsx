@@ -4,9 +4,6 @@ function App() {
   return (
     <>
       <Header />
-      <div className="bg-primary-dark-cyan font-primary font-bold text-white">
-        dssds
-      </div>
     </>
   );
 }
