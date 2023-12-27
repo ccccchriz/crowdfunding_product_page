@@ -4,9 +4,20 @@ export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menu = useRef<HTMLElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
+  const lastItem = useRef<HTMLAnchorElement>(null);
 
   const handleKeyboardDisableMenu = (e: KeyboardEvent) => {
     if (isExpanded && e.key == "Escape") {
+      button.current!.focus();
+      setIsExpanded(false);
+    }
+
+    if (
+      isExpanded &&
+      e.key == "Tab" &&
+      lastItem.current == document.activeElement
+    ) {
       setIsExpanded(false);
     }
   };
@@ -42,6 +53,7 @@ export default function Header() {
           event.stopPropagation();
           setIsExpanded((value) => !value);
         }}
+        ref={button}
       >
         {isExpanded ? (
           <img
@@ -76,7 +88,7 @@ export default function Header() {
             </a>
           </li>
           <li className="py-4 px-4 font-medium text-lg">
-            <a href="" className="w-full">
+            <a href="" className="w-full" ref={lastItem}>
               Get Started
             </a>
           </li>
