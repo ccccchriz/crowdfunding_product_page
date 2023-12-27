@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CompanyInfo from "./components/CompanyInfo";
+import ProjectStats from "./components/ProjectStats";
 
 interface tierTypes {
   name: string;
@@ -37,11 +38,17 @@ function App() {
     <>
       <Header />
       {data ? (
-        <main className="bg-neutral-dark-gray p-4">
+        <main className="bg-neutral-light-gray p-4 flex flex-col gap-4 font-primary">
           <CompanyInfo
             company={data.company}
             logo={data.logo}
             short_info={data.short_info}
+          />
+          <ProjectStats
+            money_collected={data.money_collected}
+            money_wanted={data.money_wanted}
+            backers={data.backers}
+            days_left={data.days_left}
           />
         </main>
       ) : (
