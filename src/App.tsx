@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CompanyInfo from "./components/CompanyInfo";
 import ProjectStats from "./components/ProjectStats";
+import AboutProject from "./components/AboutProject";
 
 interface tierTypes {
   name: string;
@@ -19,7 +20,7 @@ interface dataTypes {
   money_collected: number;
   backers: number;
   days_left: number;
-  about: String[];
+  about: string[];
   tiers: tierTypes[];
   thanks_message: string;
   no_reward_info: string;
@@ -50,6 +51,7 @@ function App() {
             backers={data.backers}
             days_left={data.days_left}
           />
+          <AboutProject about={data.about} tiers={data.tiers} />
         </main>
       ) : (
         <p>Loading</p>
