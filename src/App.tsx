@@ -4,6 +4,7 @@ import CompanyInfo from "./components/CompanyInfo";
 import ProjectStats from "./components/ProjectStats";
 import AboutProject from "./components/AboutProject";
 import ThanksDialog from "./components/ThanksDialog";
+import SelectionDialog from "./components/SelectionDialog";
 
 interface tierTypes {
   name: string;
@@ -29,8 +30,10 @@ interface dataTypes {
 
 function App() {
   const [data, setData] = useState<dataTypes>();
+  const [modalIndex, setModalIndex] = useState<number>(-1);
 
   const thanksDialog = useRef<HTMLDialogElement>(null);
+  const selectionDialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     fetch("data.json")
@@ -56,15 +59,37 @@ function App() {
               days_left={data.days_left}
             />
             <AboutProject about={data.about} tiers={data.tiers} />
-            <button
-              type="button"
-              className="bg-black p-16 text-white"
-              onClick={() => thanksDialog.current!.showModal()}
-            >
-              OPEN DIALOG
-            </button>
           </main>
           <ThanksDialog message={data.thanks_message} ref={thanksDialog} />
+          <SelectionDialog ref={selectionDialog}>
+            {modalIndex == -1 && (
+              <>
+                <h3>Pledge with no reward</h3>
+                <p>{data.no_reward_info}</p>
+                <form action="">
+                  <label htmlFor="pledge">Enter your pledge</label>
+                  <div className="">
+                    <input
+                      type="number"
+                      name="pledge"
+                      id="pledge"
+                      min={2}
+                      max={data.money_wanted - data.money_collected}
+                    />
+                    <button type="submit"></button>
+                  </div>
+                </form>
+              </>
+            )}
+          </SelectionDialog>
+          <button
+            onClick={() => {
+              setModalIndex(-1);
+              selectionDialog.current!.showModal();
+            }}
+          >
+            GUIASSSSSSSSSSS
+          </button>
         </>
       ) : (
         <p>Loading</p>
