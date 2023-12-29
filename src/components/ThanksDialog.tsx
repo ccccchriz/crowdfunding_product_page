@@ -10,7 +10,10 @@ const ThanksDialog = forwardRef(
     useImperativeHandle(ref, () => dialog.current!, []);
 
     return (
-      <dialog ref={dialog}>
+      <dialog
+        ref={dialog}
+        className="absolute  rounded-lg backdrop:bg-black backdrop:opacity-70"
+      >
         <div className="grid place-items-center text-center gap-4 px-4 py-12 font-primary rounded-lg">
           <img src="assets/images/icon-check.svg" alt="" />
           <h2 className="text-xl font-bold">Thanks for your support</h2>
