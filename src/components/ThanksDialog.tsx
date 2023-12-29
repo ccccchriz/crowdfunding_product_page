@@ -19,6 +19,7 @@ const ThanksDialog = forwardRef(
           <h2 className="text-xl font-bold">Thanks for your support</h2>
           <p className="text-neutral-dark-gray">{message}</p>
           <button
+            autoFocus
             type="button"
             onClick={() => dialog.current!.close()}
             className="bg-primary-cyan text-white px-8 py-2 rounded-full font-medium"
