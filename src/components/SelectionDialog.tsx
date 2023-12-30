@@ -12,7 +12,7 @@ const SelectionDialog = forwardRef(
     return (
       <dialog
         ref={dialog}
-        className="absolute  rounded-lg backdrop:bg-black backdrop:opacity-70"
+        className="absolute rounded-lg backdrop:bg-black backdrop:opacity-70"
       >
         <div className="font-primary rounded-lg p-4 grid gap-4">
           <div className="flex justify-between items-center">
