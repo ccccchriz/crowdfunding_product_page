@@ -64,21 +64,39 @@ function App() {
           <SelectionDialog ref={selectionDialog}>
             {modalIndex == -1 && (
               <>
-                <h3>Pledge with no reward</h3>
-                <p>{data.no_reward_info}</p>
-                <form action="">
-                  <label htmlFor="pledge">Enter your pledge</label>
-                  <div className="">
-                    <input
-                      type="number"
-                      name="pledge"
-                      id="pledge"
-                      min={2}
-                      max={data.money_wanted - data.money_collected}
-                    />
-                    <button type="submit"></button>
-                  </div>
-                </form>
+                <div className="p-2 grid gap-4">
+                  <h3 className="font-bold text-lg">Pledge with no reward</h3>
+                  <p className="text-neutral-dark-gray">
+                    {data.no_reward_info}
+                  </p>
+                  <form
+                    action=""
+                    className="border-t border-t-neutral-dark-gray pt-4 w-full"
+                  >
+                    <div className="grid grid-cols-2 gap-4">
+                      <label
+                        htmlFor="pledge"
+                        className="col-start-1 col-end-3 text-center text-neutral-dark-gray"
+                      >
+                        Enter your pledge
+                      </label>
+                      <input
+                        type="number"
+                        name="pledge"
+                        id="pledge"
+                        min={2}
+                        max={data.money_wanted - data.money_collected}
+                        className="border border-neutral-dark-gray rounded-full px-4"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-primary-cyan text-white py-2 font-medium rounded-full"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </>
             )}
           </SelectionDialog>
