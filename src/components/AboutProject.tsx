@@ -7,9 +7,14 @@ interface AboutProjectProps {
     left: number;
     extra_info: string;
   }[];
+  setModalIndex: Function;
 }
 
-export default function AboutProject({ about, tiers }: AboutProjectProps) {
+export default function AboutProject({
+  about,
+  tiers,
+  setModalIndex,
+}: AboutProjectProps) {
   return (
     <div className="bg-white p-4 flex flex-col rounded-lg gap-8">
       <h2 className="font-bold text-2xl mt-4">About this project</h2>
@@ -19,8 +24,9 @@ export default function AboutProject({ about, tiers }: AboutProjectProps) {
         </p>
       ))}
       <h2 className="sr-only">Support Rewards</h2>
-      {tiers.map((el) => (
+      {tiers.map((el, index) => (
         <div
+          key={index}
           className={`border p-4 border-neutral-dark-gray rounded-lg mb-2 ${
             el.left == 0 && "opacity-40"
           }`}
@@ -41,7 +47,10 @@ export default function AboutProject({ about, tiers }: AboutProjectProps) {
               Out of Stock
             </button>
           ) : (
-            <button className="bg-primary-cyan px-4 py-2 rounded-full text-white font-medium">
+            <button
+              onClick={() => setModalIndex(index)}
+              className="bg-primary-cyan px-4 py-2 rounded-full text-white font-medium"
+            >
               Select Reward
             </button>
           )}

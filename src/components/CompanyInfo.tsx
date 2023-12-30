@@ -2,12 +2,14 @@ interface CompanyInfoProps {
   company: string;
   logo: string;
   short_info: string;
+  setModalIndex: Function;
 }
 
 export default function CompanyInfo({
   company,
   logo,
   short_info,
+  setModalIndex,
 }: CompanyInfoProps) {
   return (
     <div className="bg-white p-4 flex flex-col items-center -mt-8 rounded-lg gap-4">
@@ -17,6 +19,7 @@ export default function CompanyInfo({
       <div className="grid grid-cols-[1fr_auto] w-full gap-2">
         <button
           type="button"
+          onClick={() => setModalIndex(-1)}
           className="text-white bg-primary-cyan font-bold py-2 px-2 rounded-full"
         >
           Back this project

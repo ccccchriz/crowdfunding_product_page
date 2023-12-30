@@ -41,6 +41,11 @@ function App() {
       .then((json) => setData(json));
   }, []);
 
+  useEffect(() => {
+    console.log(modalIndex);
+    selectionDialog.current && selectionDialog.current.showModal();
+  }, [modalIndex]);
+
   return (
     <>
       <Header />
@@ -51,6 +56,7 @@ function App() {
               company={data.company}
               logo={data.logo}
               short_info={data.short_info}
+              setModalIndex={setModalIndex}
             />
             <ProjectStats
               money_collected={data.money_collected}
@@ -58,7 +64,11 @@ function App() {
               backers={data.backers}
               days_left={data.days_left}
             />
-            <AboutProject about={data.about} tiers={data.tiers} />
+            <AboutProject
+              about={data.about}
+              tiers={data.tiers}
+              setModalIndex={setModalIndex}
+            />
           </main>
           <ThanksDialog message={data.thanks_message} ref={thanksDialog} />
           <SelectionDialog ref={selectionDialog}>
@@ -99,15 +109,57 @@ function App() {
                 </div>
               </>
             )}
+            {modalIndex != -1 && (
+              <>
+                <div className="p-2 grid gap-4">
+                  <div className="">
+                    <h3 className="font-bold text-lg">
+                      {data.tiers[modalIndex].name}
+                    </h3>
+                    <p className="text-primary-cyan font-medium">
+                      Pledge ${data.tiers[modalIndex].min_money} or more
+                    </p>
+                  </div>
+                  <p className="text-neutral-dark-gray">
+                    {data.tiers[modalIndex].description}
+                  </p>
+                  <p className="flex items-center gap-2 text-neutral-dark-gray">
+                    <strong className="text-xl text-black">
+                      {data.tiers[modalIndex].left}
+                    </strong>{" "}
+                    left
+                  </p>
+                  <form
+                    action=""
+                    className="border-t border-t-neutral-dark-gray pt-4 w-full"
+                  >
+                    <div className="grid grid-cols-2 gap-4">
+                      <label
+                        htmlFor="pledge"
+                        className="col-start-1 col-end-3 text-center text-neutral-dark-gray"
+                      >
+                        Enter your pledge
+                      </label>
+                      <input
+                        type="number"
+                        name="pledge"
+                        id="pledge"
+                        min={data.tiers[modalIndex].min_money}
+                        max={data.money_wanted - data.money_collected}
+                        className="border border-neutral-dark-gray rounded-full px-4"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-primary-cyan text-white py-2 font-medium rounded-full"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </>
+            )}
           </SelectionDialog>
-          <button
-            onClick={() => {
-              setModalIndex(-1);
-              selectionDialog.current!.showModal();
-            }}
-          >
-            GUIASSSSSSSSSSS
-          </button>
         </>
       ) : (
         <p>Loading</p>
