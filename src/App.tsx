@@ -43,8 +43,12 @@ function App() {
 
   useEffect(() => {
     console.log(modalIndex);
-    selectionDialog.current && selectionDialog.current.showModal();
   }, [modalIndex]);
+
+  const handleClick = (index: number) => {
+    setModalIndex(index);
+    selectionDialog.current && selectionDialog.current.showModal();
+  };
 
   return (
     <>
@@ -56,7 +60,7 @@ function App() {
               company={data.company}
               logo={data.logo}
               short_info={data.short_info}
-              setModalIndex={setModalIndex}
+              setModalIndex={handleClick}
             />
             <ProjectStats
               money_collected={data.money_collected}
@@ -67,7 +71,7 @@ function App() {
             <AboutProject
               about={data.about}
               tiers={data.tiers}
-              setModalIndex={setModalIndex}
+              setModalIndex={handleClick}
             />
           </main>
           <ThanksDialog message={data.thanks_message} ref={thanksDialog} />
