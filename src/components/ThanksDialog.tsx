@@ -12,7 +12,7 @@ const ThanksDialog = forwardRef(
     return (
       <dialog
         ref={dialog}
-        className="absolute  rounded-lg backdrop:bg-black backdrop:opacity-70"
+        className="rounded-lg backdrop:bg-black backdrop:opacity-70"
       >
         <div className="grid place-items-center text-center gap-4 px-4 py-12 font-primary rounded-lg">
           <img src="assets/images/icon-check.svg" alt="" />
