@@ -41,9 +41,17 @@ function App() {
       .then((json) => setData(json));
   }, []);
 
-  useEffect(() => {
-    console.log(modalIndex);
-  }, [modalIndex]);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const input = (event.target as HTMLFormElement).querySelector("input");
+    setData({
+      ...data,
+      money_collected: data?.money_collected! + +input!.value,
+      backers: data?.backers! + 1,
+    } as dataTypes);
+    selectionDialog.current!.close();
+    thanksDialog.current!.showModal();
+  };
 
   const handleClick = (index: number) => {
     setModalIndex(index);
@@ -84,6 +92,9 @@ function App() {
                     {data.no_reward_info}
                   </p>
                   <form
+                    onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
+                      handleSubmit(event)
+                    }
                     action=""
                     className="border-t border-t-neutral-dark-gray pt-4 w-full"
                   >
@@ -95,11 +106,11 @@ function App() {
                         Enter your pledge
                       </label>
                       <input
+                        required
                         type="number"
                         name="pledge"
                         id="pledge"
                         min={2}
-                        max={data.money_wanted - data.money_collected}
                         className="border border-neutral-dark-gray rounded-full px-4"
                       />
                       <button
@@ -145,11 +156,11 @@ function App() {
                         Enter your pledge
                       </label>
                       <input
+                        required
                         type="number"
                         name="pledge"
                         id="pledge"
                         min={data.tiers[modalIndex].min_money}
-                        max={data.money_wanted - data.money_collected}
                         className="border border-neutral-dark-gray rounded-full px-4"
                       />
                       <button
