@@ -23,18 +23,18 @@ export default function ProjectStats({
   return (
     <div className="bg-white p-4 flex flex-col items-center rounded-lg gap-4 pt-6">
       <h2 className="sr-only">Project statistics</h2>
-      <ul>
-        <li className="grid text-center after:h-[1px] after:w-16 after:bg-neutral-dark-gray after:mx-auto after:my-4">
+      <ul className="grid md:grid-cols-3 w-full">
+        <li className="grid text-center after:h-[1px] after:w-16 after:bg-neutral-dark-gray after:mx-auto after:my-4 md:after:content-none md:border-r md:text-left md:pl-8">
           <strong className="text-2xl">${dotNumber(money_collected)}</strong>
           <span className="text-neutral-dark-gray text-sm">
             of ${dotNumber(money_wanted)} backed
           </span>
         </li>
-        <li className="grid text-center after:h-[1px] after:w-16 after:bg-neutral-dark-gray after:mx-auto after:my-4">
+        <li className="grid text-center after:h-[1px] after:w-16 after:bg-neutral-dark-gray after:mx-auto after:my-4 md:after:content-none md:border-r md:text-left md:pl-8">
           <strong className="text-2xl">{dotNumber(backers)}</strong>
           <span className="text-neutral-dark-gray text-sm">total backers</span>
         </li>
-        <li className="grid text-center">
+        <li className="grid text-center md:text-left md:pl-8">
           <strong className="text-2xl">{days_left}</strong>
           <span className="text-neutral-dark-gray text-sm">days left</span>
         </li>

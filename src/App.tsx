@@ -82,7 +82,7 @@ function App() {
       {data ? (
         <>
           <main className="bg-neutral-light-gray p-4 flex flex-col items-center gap-4 font-primary">
-            <div className="max-w-4xl">
+            <div className="max-w-3xl grid items-center gap-4">
               <CompanyInfo
                 company={data.company}
                 logo={data.logo}
