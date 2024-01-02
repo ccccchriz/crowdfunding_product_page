@@ -41,14 +41,32 @@ function App() {
       .then((json) => setData(json));
   }, []);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    event: React.FormEvent<HTMLFormElement>,
+    index?: number
+  ) => {
     event.preventDefault();
     const input = (event.target as HTMLFormElement).querySelector("input");
-    setData({
-      ...data,
-      money_collected: data?.money_collected! + +input!.value,
-      backers: data?.backers! + 1,
-    } as dataTypes);
+    if (index != undefined) {
+      let tiers = data?.tiers;
+      tiers![index] = {
+        ...tiers![index],
+        left: tiers![index].left - 1,
+      };
+      setData({
+        ...data,
+        money_collected: data?.money_collected! + +input!.value,
+        backers: data?.backers! + 1,
+        tiers: tiers,
+      } as dataTypes);
+    } else {
+      setData({
+        ...data,
+        money_collected: data?.money_collected! + +input!.value,
+        backers: data?.backers! + 1,
+      } as dataTypes);
+    }
+    input!.value = "";
     selectionDialog.current!.close();
     thanksDialog.current!.showModal();
   };
@@ -124,7 +142,7 @@ function App() {
                 </div>
               </>
             )}
-            {modalIndex != -1 && (
+            {modalIndex >= 0 && modalIndex < data.tiers.length && (
               <>
                 <div className="p-2 grid gap-4">
                   <div className="">
@@ -145,6 +163,9 @@ function App() {
                     left
                   </p>
                   <form
+                    onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
+                      handleSubmit(event, modalIndex)
+                    }
                     action=""
                     className="border-t border-t-neutral-dark-gray pt-4 w-full"
                   >
