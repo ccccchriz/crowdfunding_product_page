@@ -14,7 +14,7 @@ const ThanksDialog = forwardRef(
         ref={dialog}
         className="rounded-lg backdrop:bg-black backdrop:opacity-70"
       >
-        <div className="grid place-items-center text-center gap-4 px-4 py-12 font-primary rounded-lg">
+        <div className="grid place-items-center text-center gap-4 px-4 py-12 font-primary rounded-lg max-w-4xl">
           <img src="assets/images/icon-check.svg" alt="" />
           <h2 className="text-xl font-bold">Thanks for your support</h2>
           <p className="text-neutral-dark-gray">{message}</p>

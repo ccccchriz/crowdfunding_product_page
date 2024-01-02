@@ -27,33 +27,37 @@ export default function AboutProject({
       {tiers.map((el, index) => (
         <div
           key={index}
-          className={`border p-4 border-neutral-dark-gray rounded-lg mb-2 ${
+          className={`border p-4 md:p-8 border-neutral-dark-gray rounded-lg mb-2 ${
             el.left == 0 && "opacity-40"
           }`}
         >
-          <h3 className="font-bold">{el.name}</h3>
-          <p className="text-primary-cyan font-medium mb-4">
-            Pledge ${el.min_money} or more
-          </p>
+          <div className="grid md:grid-cols-2">
+            <h3 className="font-bold">{el.name}</h3>
+            <p className="text-primary-cyan font-medium mb-4 md:text-right">
+              Pledge ${el.min_money} or more
+            </p>
+          </div>
           <p className="mb-4">{el.description}</p>
-          <p className="flex items-center gap-2 mb-4">
-            <strong className="font-bold text-2xl">{el.left}</strong> left
-          </p>
-          {el.left == 0 ? (
-            <button
-              disabled
-              className="bg-neutral-dark-gray px-4 py-2 rounded-full text-white font-medium"
-            >
-              Out of Stock
-            </button>
-          ) : (
-            <button
-              onClick={() => setModalIndex(index)}
-              className="bg-primary-cyan px-4 py-2 rounded-full text-white font-medium"
-            >
-              Select Reward
-            </button>
-          )}
+          <div className="grid md:grid-cols-2">
+            <p className="flex items-center gap-2 mb-4 md:mb-0">
+              <strong className="font-bold text-2xl">{el.left}</strong> left
+            </p>
+            {el.left == 0 ? (
+              <button
+                disabled
+                className="bg-neutral-dark-gray px-4 py-2 rounded-full text-white font-medium"
+              >
+                Out of Stock
+              </button>
+            ) : (
+              <button
+                onClick={() => setModalIndex(index)}
+                className="bg-primary-cyan px-4 py-2 rounded-full text-white font-medium"
+              >
+                Select Reward
+              </button>
+            )}
+          </div>
         </div>
       ))}
     </div>

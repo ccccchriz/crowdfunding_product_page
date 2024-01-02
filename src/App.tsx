@@ -81,24 +81,26 @@ function App() {
       <Header />
       {data ? (
         <>
-          <main className="bg-neutral-light-gray p-4 flex flex-col gap-4 font-primary">
-            <CompanyInfo
-              company={data.company}
-              logo={data.logo}
-              short_info={data.short_info}
-              setModalIndex={handleClick}
-            />
-            <ProjectStats
-              money_collected={data.money_collected}
-              money_wanted={data.money_wanted}
-              backers={data.backers}
-              days_left={data.days_left}
-            />
-            <AboutProject
-              about={data.about}
-              tiers={data.tiers}
-              setModalIndex={handleClick}
-            />
+          <main className="bg-neutral-light-gray p-4 flex flex-col items-center gap-4 font-primary">
+            <div className="max-w-4xl">
+              <CompanyInfo
+                company={data.company}
+                logo={data.logo}
+                short_info={data.short_info}
+                setModalIndex={handleClick}
+              />
+              <ProjectStats
+                money_collected={data.money_collected}
+                money_wanted={data.money_wanted}
+                backers={data.backers}
+                days_left={data.days_left}
+              />
+              <AboutProject
+                about={data.about}
+                tiers={data.tiers}
+                setModalIndex={handleClick}
+              />
+            </div>
           </main>
           <ThanksDialog message={data.thanks_message} ref={thanksDialog} />
           <SelectionDialog ref={selectionDialog}>
@@ -169,10 +171,10 @@ function App() {
                     action=""
                     className="border-t border-t-neutral-dark-gray pt-4 w-full"
                   >
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-[1fr_auto_auto]">
                       <label
                         htmlFor="pledge"
-                        className="col-start-1 col-end-3 text-center text-neutral-dark-gray"
+                        className="col-start-1 col-end-3 text-center text-neutral-dark-gray md:col-end-2 self-center"
                       >
                         Enter your pledge
                       </label>
@@ -186,7 +188,7 @@ function App() {
                       />
                       <button
                         type="submit"
-                        className="bg-primary-cyan text-white py-2 font-medium rounded-full"
+                        className="bg-primary-cyan text-white py-2 px-4 font-medium rounded-full"
                       >
                         Continue
                       </button>
