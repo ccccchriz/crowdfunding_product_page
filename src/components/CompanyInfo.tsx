@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface CompanyInfoProps {
   company: string;
   logo: string;
@@ -11,6 +13,8 @@ export default function CompanyInfo({
   short_info,
   setModalIndex,
 }: CompanyInfoProps) {
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+
   return (
     <div className="bg-white p-4 flex flex-col items-center -mt-8 rounded-lg gap-4">
       <img src={logo} alt="" className="size-14 -mt-10" />
@@ -26,11 +30,20 @@ export default function CompanyInfo({
         </button>
         <button
           type="button"
+          onClick={() => setIsBookmarked((value) => !value)}
           className="flex items-center gap-4 bg-neutral-light-gray rounded-full md:pr-4"
         >
-          <img src="assets/images/icon-bookmark.svg" alt="" />
-          <span className="sr-only md:not-sr-only mr-4 font-medium">
-            Bookmark
+          {isBookmarked ? (
+            <img src="assets/images/icon-bookmarked.svg" alt="" />
+          ) : (
+            <img src="assets/images/icon-bookmark.svg" alt="" />
+          )}
+          <span
+            className={`sr-only md:not-sr-only mr-4 font-bold ${
+              isBookmarked && "text-primary-cyan"
+            }`}
+          >
+            {isBookmarked ? "Bookmarked" : "Bookmark"}
           </span>
         </button>
       </div>
